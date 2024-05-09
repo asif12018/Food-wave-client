@@ -1,0 +1,19 @@
+.NavLink.active {
+    position: relative;
+    display: inline-block;
+    color: black;
+    background-color: brown !important;
+}
+
+.active:hover {
+    color: gray;
+}
+
+.nav-holder.active{
+    background-color: brown !important;
+}
+
+
+nav a.active{
+    border-bottom: 5px solid #95d230 ;
+}
