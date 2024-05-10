@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cards from "../Cards/Cards";
+import { Link } from "react-router-dom";
 
 const FeatureFood = () => {
     const [foods, setFoods] = useState([])
@@ -15,7 +16,7 @@ const FeatureFood = () => {
             setFeaturedFood(filteredFeaturedFood);
         })
     },[])
-    console.log('feature food:',featuredFood)
+
     return (
         <div className="my-10">
             <h3 className="text-4xl font-bold text-center">Feature Foods</h3>
@@ -25,7 +26,7 @@ const FeatureFood = () => {
                 }
             </div>
             <div className="flex justify-center">
-                <button className="btn">See All</button>
+                <Link className="btn">Show All Food</Link>
             </div>
         </div>
     );

@@ -81,7 +81,7 @@ const NavBar = () => {
             <NavLink to={'/addFood'} className="inline-block text-black hover:text-gray-600" >Add Food</NavLink>
 
 
-            <NavLink to={'/dfdff'} className="inline-block text-black hover:text-gray-600" >Careers</NavLink>
+            <NavLink to={'/allFood'} className="inline-block text-black hover:text-gray-600" >All Food</NavLink>
 
 
             <NavLink to={'/register'} className="inline-block text-black hover:text-gray-600" >register</NavLink>
