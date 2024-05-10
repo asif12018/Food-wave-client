@@ -206,7 +206,7 @@ const Addproduct = () => {
 
 
                     </div>
-                    <button type="submit" className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Add Item</button>
+                    <button type="submit" className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Add Food To Donate List</button>
                 </form>
             </div>
         </div>

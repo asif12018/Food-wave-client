@@ -6,7 +6,9 @@ export default {
     'node_modules/preline/dist/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      preset: 'lemonade'
+    },
   },
   plugins: [
     require('daisyui'),
