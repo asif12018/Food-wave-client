@@ -13,6 +13,7 @@ import About from './Pages/About/About.jsx';
 import Register from './Pages/registration/Register.jsx';
 import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import Login from './Pages/Login/Login.jsx';
+import AddFood from './Pages/AddFood/AddFood.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path:'/login',
         element:<Login></Login>
+      },
+      {
+        path:'/addFood',
+        element:<AddFood></AddFood>
       }
     ]
   },
