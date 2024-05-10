@@ -5,6 +5,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import './AddFood.css'
+// const axios = require('axios/dist/browser/axios.cjs'); // browser
+import axios from "axios";
 
 
 const Addproduct = () => {
@@ -55,15 +57,16 @@ const Addproduct = () => {
         const notes = form.notes.value;
         const quantity = form.quantity.value;
         const expired = form.expired.value;
-        const stock = form.stock.value;
         const email = user.email;
         const donnarName = user.displayName;
         const donnarLocation = locations;
         const donnarImage = user?.photoURL;
         
-        const itemData = {donnarName, photo, notes, quantity,  expired, stock, itemName, email, donnarLocation, donnarImage}
-        console.log(itemData);
-        // fetch(`https://artifex-server-site.vercel.app/`,{
+        const itemData = {donnarName, photo, notes, quantity,  expired, itemName, email, donnarLocation, donnarImage}
+        // console.log(itemData);
+        // console.log(locations.
+        //     properties.municipality)
+        // fetch(`http://localhost:5000/addFood`,{
         //     method: 'POST',
         //     headers:{
         //         'content-type':'application/json'
@@ -72,14 +75,16 @@ const Addproduct = () => {
         // })
         // .then(res => res.json())
         // .then(data => {
-        //     Swal.fire({
-        //         title: 'Success!',
-        //         text: 'Product added successfully',
-        //         icon: 'success',
-        //         confirmButtonText: 'okk'
-        //       })
-        //       form.reset();
         //     console.log(data)})
+        axios.post('http://localhost:5000/addFood',itemData)
+        .then(data => console.log(data.data))
+        .catch(error => console.log(error))
+        Swal.fire({
+            title: "Success",
+            text: "Items Added SuccessFully",
+            icon: "success"
+          });
+          form.reset();
     }
     return (
         <div>
@@ -153,19 +158,19 @@ const Addproduct = () => {
                         </div>
                         <label className="mt-4 mb-2 block text-sm font-medium">Food image url</label>
                         <div className="relative">
-                            <input type="text" name="photo" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the image url" required/>
+                            <input type="text" name="photo" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the image url" required/>
 
                         </div>
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Additional notes</label>
                         <div className="relative">
-                            <input type="text" name="notes" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required/>
+                            <input type="text" name="notes" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required/>
 
                         </div>
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Enter the Quantity</label>
                         <div className="relative">
-                            <input type="text" name="quantity" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required/>
+                            <input type="number" name="quantity" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required/>
 
                         </div>
 
@@ -175,15 +180,11 @@ const Addproduct = () => {
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Expired date</label>
                         <div className="relative">
-                            <input type="text" name="expired" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the process time" required/>
+                            <input type="date" name="expired" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the process time" required/>
 
                         </div>
 
-                        <label className="mt-4 mb-2 block text-sm font-medium">stock status</label>
-                        <div className="relative">
-                            <input type="text" name="stock" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the stock status" required/>
-
-                        </div>
+                        
 
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Search your location and selected the location from suggestion list</label>
