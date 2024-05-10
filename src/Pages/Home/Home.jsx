@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+
 import Banner from "../../components/Banner/Banner";
+import FeatureFood from "../../components/FeatureFood/FeatureFood";
 
 
 const Home = () => {
-    const [showBanner, setShowBanner] = useState(true);
+    
     return (
         <div>
-            {
-                showBanner && <Banner></Banner>
-            }
+            
+            <Banner></Banner>
+            <FeatureFood></FeatureFood>
+            
         </div>
     );
 };

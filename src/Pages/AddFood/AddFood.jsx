@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
@@ -13,43 +13,43 @@ const Addproduct = () => {
     //auto location code start from here
     const [locations, setLocations] = useState(null)
     useEffect(() => {
-      const autocomplete = new GeocoderAutocomplete(
-        document.getElementById("autocomplete"), 
-        'b248bfbcefa94d508f1d7a0dbea89df4', 
-        { /* Geocoder options */ }
-      );
-  
-      autocomplete.on('select', (location) => {
-        // Handle selected location
-        console.log("Selected location:", location);
-        setLocations(location)
-      });
-      
-      autocomplete.on('suggestions', (suggestions) => {
-        // Handle suggestions
-        console.log("Suggestions:", suggestions);
-      });
-  
-      // Clean up event listeners when component unmounts
-      return () => {
-        autocomplete.off('select');
-        autocomplete.off('suggestions');
-      };
+        const autocomplete = new GeocoderAutocomplete(
+            document.getElementById("autocomplete"),
+            'b248bfbcefa94d508f1d7a0dbea89df4',
+            { /* Geocoder options */ }
+        );
+
+        autocomplete.on('select', (location) => {
+            // Handle selected location
+            console.log("Selected location:", location);
+            setLocations(location)
+        });
+
+        autocomplete.on('suggestions', (suggestions) => {
+            // Handle suggestions
+            console.log("Suggestions:", suggestions);
+        });
+
+        // Clean up event listeners when component unmounts
+        return () => {
+            autocomplete.off('select');
+            autocomplete.off('suggestions');
+        };
     }, []); // Empty dependency array ensures the effect runs only once after the initial render
-    
+
 
 
 
 
 
     //----------------------------//
-     // context api data
-     const {user} = useContext(AuthContext);
-     
+    // context api data
+    const { user } = useContext(AuthContext);
+
 
     //add item function
     const handleAddItems = e => {
-        
+
         e.preventDefault();
         const form = e.target;
         const itemName = form.item_name.value;
@@ -61,8 +61,9 @@ const Addproduct = () => {
         const donnarName = user.displayName;
         const donnarLocation = locations;
         const donnarImage = user?.photoURL;
-        
-        const itemData = {donnarName, photo, notes, quantity,  expired, itemName, email, donnarLocation, donnarImage}
+        const status = form.status.value;
+
+        const itemData = { donnarName, photo, notes, quantity, expired, itemName, email, donnarLocation, donnarImage ,status}
         // console.log(itemData);
         // console.log(locations.
         //     properties.municipality)
@@ -76,15 +77,15 @@ const Addproduct = () => {
         // .then(res => res.json())
         // .then(data => {
         //     console.log(data)})
-        axios.post('http://localhost:5000/addFood',itemData)
-        .then(data => console.log(data.data))
-        .catch(error => console.log(error))
+        axios.post('http://localhost:5000/addFood', itemData)
+            .then(data => console.log(data.data))
+            .catch(error => console.log(error))
         Swal.fire({
             title: "Success",
             text: "Items Added SuccessFully",
             icon: "success"
-          });
-          form.reset();
+        });
+        form.reset();
     }
     return (
         <div>
@@ -145,57 +146,62 @@ const Addproduct = () => {
 
 
                 </div>
-                <form onSubmit={handleAddItems } className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+                <form onSubmit={handleAddItems} className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
                     <p className="text-xl font-medium">Add Item Details</p>
                     <p className="text-gray-400">Complete this form to add items</p>
                     <div className="">
                         <label className="mt-4 mb-2 block text-sm font-medium">Food name</label>
                         <div className="relative">
-                            <input type="text" name="item_name" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the item name" required/>
+                            <input type="text" name="item_name" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the item name" required />
                             <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
 
                             </div>
                         </div>
                         <label className="mt-4 mb-2 block text-sm font-medium">Food image url</label>
                         <div className="relative">
-                            <input type="text" name="photo" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the image url" required/>
+                            <input type="text" name="photo" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the image url" required />
 
                         </div>
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Additional notes</label>
                         <div className="relative">
-                            <input type="text" name="notes" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required/>
+                            <input type="text" name="notes" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required />
 
                         </div>
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Enter the Quantity</label>
                         <div className="relative">
-                            <input type="number" name="quantity" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required/>
+                            <input type="number" name="quantity" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the subcategory_name" required />
 
                         </div>
 
-                        
+
 
 
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Expired date</label>
                         <div className="relative">
-                            <input type="date" name="expired" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the process time" required/>
-
+                            <input type="date" name="expired" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the process time" required />
                         </div>
 
                         
+                        <label className="mt-4 mb-2 block text-sm font-medium">status</label>
+                        <div className="relative">
+                            <input type="text" name="status" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm  shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter the process time" defaultValue={'available'} required />
+                        </div>
+
+
 
 
                         <label className="mt-4 mb-2 block text-sm font-medium">Search your location and selected the location from suggestion list</label>
-                         
+
                         <div className="location-holder mb-[20px]">
-                        <div id="autocomplete" className="autocomplete-container relative w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"></div>
+                            <div id="autocomplete" className="autocomplete-container relative w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"></div>
                         </div>
 
 
 
-                        
+
 
 
 

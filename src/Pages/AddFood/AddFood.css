@@ -4,6 +4,8 @@
   }
   
   
-  .autocomplete-container > .geoapify-close-button>:first-child{
+  .autocomplete-container>.geoapify-close-button>:first-child{
       display: none;
   }
+
+ 
