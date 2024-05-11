@@ -30,11 +30,18 @@ const AllFood = () => {
     },[])
     // console.log(items)
 
+    //food filtering function
+    const handleSearch = (name) =>{
+        console.log('this is name:',name)
+        axios.get(`http://localhost:5000/filter?name=${name}`)
+        .then(data => setFoods(data.data))
+    }
+
     //react search auto suggestion intrigation
     const handleOnSearch = (string, results) => {
         // onSearch will have as the first callback parameter
         // the string searched and for the second the results.
-        console.log(string, results)
+        // console.log(string, results)
       }
 
       const handleOnHover = (result) => {
@@ -44,7 +51,8 @@ const AllFood = () => {
 
       const handleOnSelect = (item) => {
         // the item selected
-        console.log(item)
+        console.log(item.name)
+        handleSearch(item.name)
       }
 
       const handleOnFocus = () => {
@@ -54,11 +62,13 @@ const AllFood = () => {
       const formatResult = (item) => {
         return (
           <>
-            <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
-            <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
+            {/* <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span> */}
+            <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
           </>
         )
       }
+
+      
     return (
         <div className="max-w-[1400px] mx-auto">
             <div className="" style={{ width: "50%" }}>
