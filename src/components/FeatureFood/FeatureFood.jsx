@@ -35,7 +35,7 @@ const FeatureFood = () => {
                 }
             </div>
             <div className="flex justify-center">
-                <Link to={'/allFood'} className="btn">Show All Food</Link>
+                <Link to={'/available'} className="btn">Show All Food</Link>
             </div>
         </div>
     );

@@ -5,12 +5,12 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import Hero from "../../components/Hero/Hero";
 
 
-const AllFood = () => {
+const AvailableFood = () => {
   const [foods, setFoods] = useState([])
   const [items, setItems] = useState([])
   const [allFood, setAllFood] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:5000/allFood')
+    axios.get(`http://localhost:5000/allFood?status=${'available'}`)
       .then(data => {
         // setItems(data.data)
         setFoods(data.data);
@@ -24,13 +24,11 @@ const AllFood = () => {
         })
 
         setItems(newArray)
-
-
       }
-
 
       )
   }, [])
+  console.log(foods)
   // console.log(items)
 
   //food filtering function
@@ -85,7 +83,7 @@ const AllFood = () => {
   }
   return (
     <div className="max-w-[1400px] mx-auto">
-      <Hero></Hero>
+        <Hero></Hero>
       <div className="flex w-full  justify-between mb-[20px]">
       <div className="w-1/2 " style={{ width: "50%" }}>
         <ReactSearchAutocomplete
@@ -132,4 +130,4 @@ const AllFood = () => {
   );
 };
 
-export default AllFood;
+export default AvailableFood;

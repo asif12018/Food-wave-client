@@ -15,6 +15,7 @@ import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import Login from './Pages/Login/Login.jsx';
 import AddFood from './Pages/AddFood/AddFood.jsx';
 import AllFood from './Pages/AllFood/AllFood.jsx';
+import AvailableFood from './Pages/Available Food/AvailableFood.jsx';
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path:'/allFood',
         element:<AllFood></AllFood>
+      },
+      {
+        path:'/available',
+        element:<AvailableFood></AvailableFood>
       }
     ]
   },
