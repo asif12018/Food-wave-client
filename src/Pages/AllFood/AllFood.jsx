@@ -3,14 +3,16 @@ import axios from "axios";
 import Cards from "../../components/Cards/Cards";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import Hero from "../../components/Hero/Hero";
-
+import { Menu, MenuButton, MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
+import { IoIosArrowDown } from "react-icons/io";
 
 const AllFood = () => {
+  
   const [foods, setFoods] = useState([])
   const [items, setItems] = useState([])
   const [allFood, setAllFood] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:5000/allFood')
+    axios.get(`http://localhost:5000/allFood?status=${'available'}`)
       .then(data => {
         // setItems(data.data)
         setFoods(data.data);
@@ -24,13 +26,11 @@ const AllFood = () => {
         })
 
         setItems(newArray)
-
-
       }
-
 
       )
   }, [])
+  // console.log(foods)
   // console.log(items)
 
   //food filtering function
@@ -85,7 +85,7 @@ const AllFood = () => {
   }
   return (
     <div className="max-w-[1400px] mx-auto">
-      <Hero></Hero>
+        <Hero></Hero>
       <div className="flex w-full  justify-between mb-[20px]">
       <div className="w-1/2 " style={{ width: "50%" }}>
         <ReactSearchAutocomplete
@@ -100,25 +100,35 @@ const AllFood = () => {
         
       </div>
       <div className="w-1/2">
-        <div className="hs-dropdown relative inline-flex">
-            <button id="hs-dropdown-default" type="button" className="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-              Filter By Expired Date
-              <svg className="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
-            </button>
-
-            <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" aria-labelledby="hs-dropdown-default">
-              <a onClick={() => handleShort('all')} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
-                All
-              </a>
-              <a onClick={() => handleShort('new')} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
-                New to Old
-              </a>
-              <a onClick={() => handleShort('old')} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
-                Old to new
-              </a>
-
-            </div>
+        
+          
+          <div >
+          <Menu >
+  <MenuButton
+    px={4}
+    py={2}
+    background={'black'}
+    textColor={'white'}
+    fontWeight={'semibold'}
+    transition='all 0.2s'
+    borderRadius='md'
+    borderWidth='1px'
+    _hover={{ bg: 'gray.400' }}
+    _expanded={{ bg: 'blue.400' }}
+    _focus={{ boxShadow: 'outline' }}
+  >
+    <span className="flex items-center justify-between">Filter By Expired Date <IoIosArrowDown /></span>
+  </MenuButton>
+  <MenuList>
+    <MenuItem onClick={()=> handleShort('all')}>All food</MenuItem>
+    <MenuItem onClick={()=>handleShort('new')}>new to old</MenuItem>
+    <MenuDivider />
+    <MenuItem onClick={()=> handleShort('old')}>old to new</MenuItem>
+    
+  </MenuList>
+</Menu>
           </div>
+          
         </div>
       </div>
 

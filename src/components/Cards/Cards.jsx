@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Cards = ({ food }) => {
     
@@ -11,7 +12,7 @@ const Cards = ({ food }) => {
             <div className="card-body">
                 <h2 className="card-title">Food Name: {itemName}</h2>
                 <p> <span className='font-bold'>Note:</span> {notes}</p>
-                <p><span className='font-bold'>Pickup location:</span> {donnarLocation.properties.municipality}</p>
+                <p><span className='font-bold'>Pickup location:</span>{donnarLocation?.properties.municipality ? donnarLocation?.properties.municipality : donnarLocation?.properties.city }</p>
                 <p><span className='font-bold'>Expired Data:</span> {expired}</p>
                 <p><span className='font-bold'>Quantity:</span> {quantity}</p>
                 <p className='font-bold text-green-400'><span className='text-black'>Status:</span>{status}</p>
@@ -30,7 +31,7 @@ const Cards = ({ food }) => {
                     </div>
                 </div>
                 <div className="flex flex-col    ">
-                    <button className="btn bg-[#95d230] font-bold text-white">View Details</button>
+                    <Link to={`/details/${_id}`} className="btn bg-[#95d230] font-bold text-white">View Details</Link>
                 </div>
                 </div>
             </div>

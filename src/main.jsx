@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
+import { ChakraProvider } from '@chakra-ui/react'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -16,41 +16,54 @@ import Login from './Pages/Login/Login.jsx';
 import AddFood from './Pages/AddFood/AddFood.jsx';
 import AllFood from './Pages/AllFood/AllFood.jsx';
 import AvailableFood from './Pages/Available Food/AvailableFood.jsx';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import FoodDetails from './Pages/FoodDetails/FoodDetails.jsx';
 
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    errorElement:<ErrorPage></ErrorPage>,
-    children:[
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
       {
-        path:"/",
-        element:<Home></Home>
+        path: "/",
+        element: <Home></Home>
       },
       {
-        path:"/about",
-        element:<About></About>
+        path: "/about",
+        element: <About></About>
       },
       {
-        path:"/register",
-        element:<Register></Register>
+        path: "/register",
+        element: <Register></Register>
       },
       {
-        path:'/login',
-        element:<Login></Login>
+        path: '/login',
+        element: <Login></Login>
       },
       {
-        path:'/addFood',
-        element:<AddFood></AddFood>
+        path: '/addFood',
+        element: <AddFood></AddFood>
       },
       {
-        path:'/allFood',
-        element:<AllFood></AllFood>
+        path: '/allFood',
+        element: <AllFood></AllFood>
       },
       {
-        path:'/available',
-        element:<AvailableFood></AvailableFood>
+        path: '/available',
+        element: <AvailableFood></AvailableFood>
+      },
+      {
+        path:'/details/:id',
+        element:<FoodDetails></FoodDetails>
       }
     ]
   },
@@ -58,8 +71,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-     <AuthProvider>
-     <RouterProvider router={router} />
-     </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ChakraProvider>
+          <RouterProvider router={router} />
+        </ChakraProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )
