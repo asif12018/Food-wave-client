@@ -25,6 +25,7 @@ import {
 } from '@tanstack/react-query'
 import FoodDetails from './Pages/FoodDetails/FoodDetails.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes.jsx';
+import MangeFood from './Pages/MangeFood/MangeFood.jsx';
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path:'/details/:id',
         element:<ProtectedRoutes><FoodDetails></FoodDetails></ProtectedRoutes>
+      },
+      {
+        path:'/manageAll',
+        element:<ProtectedRoutes><MangeFood></MangeFood></ProtectedRoutes>
       }
     ]
   },

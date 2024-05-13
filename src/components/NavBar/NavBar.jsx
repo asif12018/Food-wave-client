@@ -89,6 +89,8 @@ const NavBar = () => {
 
             <NavLink to={'/register'} className="inline-block text-black hover:text-gray-600" >register</NavLink>
 
+            <NavLink to={'/manageAll'} className="inline-block text-black hover:text-gray-600" >mange food</NavLink>
+
           </div>
         </div>
 
