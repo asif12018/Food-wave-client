@@ -56,7 +56,7 @@ const FoodDetails = () => {
         //     'requesterNote', requesterNote
         //    )
            const requesterData = {donnarName, donnarEmail, foodName, foodId, requesterName, requesterEmail, requestedDate, expiredDate, requesterNote}
-           console.log(requesterData);
+        //    console.log(requesterData);
         //    console.log('requester Email:', requesterEmail)
            //sending data to the post
            axios.post('http://localhost:5000/request/',requesterData)

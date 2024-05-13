@@ -1,22 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Cards from "../../components/Cards/Cards";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import Hero from "../../components/Hero/Hero";
 import { Menu, MenuButton, MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
 import { IoIosArrowDown } from "react-icons/io";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const AllFood = () => {
-  
+  //context api data
+  const {user} = useContext(AuthContext);
   const [foods, setFoods] = useState([])
   const [items, setItems] = useState([])
   const [allFood, setAllFood] = useState([]);
+  const [defaultFood, setDefaultFood] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:5000/allFood`)
       .then(data => {
         // setItems(data.data)
-        setFoods(data.data);
-        setAllFood(data.data);
+        // setFoods(data.data);
+        // setAllFood(data.data);
+        setDefaultFood(data.data);
+        
+          checkRequestFood(data.data);
+        
         //creating a new array 
         const newArray = data.data.map(obj => {
           return {
@@ -25,11 +32,45 @@ const AllFood = () => {
           }
         })
 
-        setItems(newArray)
+        setItems(newArray); 
+        
+        
       }
 
       )
-  }, [])
+  }, [user, foods])
+
+ 
+
+  //filtering data based on the requested food
+
+
+const checkRequestFood = (food) =>{
+  
+       axios.get(`http://localhost:5000/filter/${user?.email}`)
+       .then(response =>{
+           const dataArray = response.data;
+           console.log(dataArray);
+           if(dataArray.length > 0){
+              
+            const foodIds = dataArray.map(item => item.foodId); // Extracting foodIds from the array
+            
+            const filteredFood = defaultFood.filter(food => !foodIds.includes(food._id));
+            console.log(filteredFood);
+            setFoods(filteredFood);
+            setAllFood(filteredFood);
+              
+           }else{
+              setFoods(food);
+              setAllFood(food);
+              
+           }
+       })
+  
+
+}
+
+
   // console.log(foods)
   // console.log(items)
 
