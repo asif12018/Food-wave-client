@@ -73,7 +73,6 @@ const NavBar = () => {
 
 
 
-            <NavLink to={'/allFoods'} className="inline-block text-black hover:text-gray-600" >Available Foods</NavLink>
 
             
 

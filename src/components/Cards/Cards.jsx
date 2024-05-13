@@ -8,7 +8,7 @@ const Cards = ({ food }) => {
     return (
         <div className="  bg-base-100 shadow-xl">
             <div className='max-h-[800px] py-5'>
-            <figure className='border-2 flex justify-center'><img className='h-[300px] ' src={photo} alt="Shoes" /></figure>
+            <figure className='border-2 flex justify-center'><img className='h-[300px] ' src={photo} alt="food" /></figure>
             <div className="card-body">
                 <h2 className="card-title">Food Name: {itemName}</h2>
                 <p> <span className='font-bold'>Note:</span> {notes}</p>

@@ -24,6 +24,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import FoodDetails from './Pages/FoodDetails/FoodDetails.jsx';
+import ProtectedRoutes from './routes/ProtectedRoutes.jsx';
 
 const queryClient = new QueryClient();
 
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/addFood',
-        element: <AddFood></AddFood>
+        element: <ProtectedRoutes><AddFood></AddFood></ProtectedRoutes>
       },
       {
         path: '/allFood',
@@ -59,11 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/available',
-        element: <AvailableFood></AvailableFood>
+        element: <ProtectedRoutes><AvailableFood></AvailableFood></ProtectedRoutes>
       },
       {
         path:'/details/:id',
-        element:<FoodDetails></FoodDetails>
+        element:<ProtectedRoutes><FoodDetails></FoodDetails></ProtectedRoutes>
       }
     ]
   },

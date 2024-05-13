@@ -12,7 +12,7 @@ const AllFood = () => {
   const [items, setItems] = useState([])
   const [allFood, setAllFood] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/allFood?status=${'available'}`)
+    axios.get(`http://localhost:5000/allFood`)
       .then(data => {
         // setItems(data.data)
         setFoods(data.data);
