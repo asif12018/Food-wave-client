@@ -5,9 +5,12 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { AuthContext } from './../../AuthProvider/AuthProvider';
 import moment from 'moment/moment';
 const FoodDetails = () => {
+    //checking is this user food
+    const [isUser, setIsUser] = useState(false);
+    const [requested, setRequested] = useState(false);
     //context api data
     const {user} = useContext(AuthContext);
-    // console.log(user);
+    // console.log(user.email);
     const { id } = useParams();
     const [showmap, setShowmap] = useState(false);
     const [food, setFood] = useState({});
@@ -20,9 +23,15 @@ const FoodDetails = () => {
                 setTimeout(() => {
                     setShowmap(true)
                 }, 100)
+                //checking is the user is food donnar
+                if(response.data.email == user.email){
+                    console.log('user is the donnar')
+                    setIsUser(true);
+                }
             })
 
     }, [id]);
+    
 
     //send request for food function
     const handleSentRequest = e =>{
@@ -54,10 +63,23 @@ const FoodDetails = () => {
            .then(data =>{
               console.log(data.data)
               const modal = document.getElementById('my_modal_1');
+              setRequested(true);
               modal.close();
            })
          
     }
+    //checking if the user requested that food
+    useEffect(() => {
+        if (!_id) return; // Guard against undefined _id
+        axios.get(`http://localhost:5000/request/${user.email}?foodId=${_id}`)
+            .then(data => {
+                console.log(data.data.requesterName);
+                if(data.data.requesterName){
+                    setRequested(true);
+                }
+                
+            })
+    }, [food]);
     // console.log('location', donnarLocation.properties.lat)
     return (
         <div>
@@ -71,12 +93,16 @@ const FoodDetails = () => {
                             <p><span className='font-semibold'>Food Name:</span>{itemName}</p>
                             <p><span className='font-semibold'>Food Quantity:</span>{quantity}</p>
                             <p><span className='font-semibold'>Expired Date:</span>{expired}</p>
-                            <p><span className='font-semibold'>Status:</span>{status}</p>
+                            {
+                                requested ? <p><span className='font-semibold'>Status:</span>requested</p> : <p><span className='font-semibold'>Status:</span>{status}</p>
+                            }
                             <p><span className='font-bold'>Pickup location:</span> {donnarLocation?.properties.municipality ? donnarLocation?.properties.municipality : donnarLocation?.properties.city}</p>
                             {/*--- requested food modal---*/}
                             <div>
                                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                <button className="btn bg-[#95d230] text-white font-semibold" onClick={() => document.getElementById('my_modal_1').showModal()}>request the food</button>
+                                {
+                                    isUser ? <button className='btn btn-error' disabled>You can't request your own food</button> : <button disabled={requested == true} className="btn bg-[#95d230] text-white font-semibold" onClick={() => document.getElementById('my_modal_1').showModal()}>{requested ? 'you have already requested the food' : 'request the food'}</button>
+                                }
                                 <dialog id="my_modal_1" className="modal">
                                     <div className="modal-box ">
                                         
