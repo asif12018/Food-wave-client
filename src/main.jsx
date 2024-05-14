@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/available',
-        element: <ProtectedRoutes><AvailableFood></AvailableFood></ProtectedRoutes>
+        element: <AvailableFood></AvailableFood>
       },
       {
         path:'/details/:id',

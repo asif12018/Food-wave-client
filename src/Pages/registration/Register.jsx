@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import auth from "../../firebase/firebase.config";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Register = () => {
   const [isRight, setIsRight] = useState(null);
@@ -144,7 +145,11 @@ const Register = () => {
 
 
     return (
+      <HelmetProvider>
         <div className="container  mx-auto mt-7 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <Helmet>
+            <title>FoodWave | Register</title>
+          </Helmet>
   <div className="p-4 sm:p-7">
     <div className="text-center">
       <h1 className="block text-2xl font-bold text-gray-800">Sign up</h1>
@@ -272,6 +277,7 @@ const Register = () => {
     </div>
   </div>
 </div>
+</HelmetProvider>
     );
 };
 

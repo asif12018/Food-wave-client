@@ -8,6 +8,7 @@ import './AddFood.css'
 // const axios = require('axios/dist/browser/axios.cjs'); // browser
 import axios from "axios";
 import useAxiosSecure from "../../customHooks/useAxiosSecure";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 const Addproduct = () => {
@@ -90,7 +91,11 @@ const Addproduct = () => {
         form.reset();
     }
     return (
+        <HelmetProvider>
         <div>
+            <Helmet>
+                <title>FoodWave | AddFood</title>
+            </Helmet>
             <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
                 <a href="#" className="text-2xl font-bold text-gray-800">Donate Food!</a>
                 <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
@@ -219,6 +224,7 @@ const Addproduct = () => {
                 </form>
             </div>
         </div>
+        </HelmetProvider>
     );
 };
 

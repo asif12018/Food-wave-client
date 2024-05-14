@@ -7,6 +7,7 @@ import { GeocoderAutocomplete } from "@geoapify/geocoder-autocomplete";
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss'
 import useAxiosSecure from "../../customHooks/useAxiosSecure";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const MangeFood = () => {
   const axiosSecure = useAxiosSecure()
@@ -117,7 +118,11 @@ const MangeFood = () => {
     
   }
   return (
+    <HelmetProvider>
     <div>
+      <Helmet>
+        <title>FoodWave | ManageFood</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -233,6 +238,7 @@ const MangeFood = () => {
         </dialog>
       </div>
     </div>
+    </HelmetProvider>
   );
 };
 

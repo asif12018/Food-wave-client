@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Login = () => {
     const [isRight, setIsRight] = useState(null);
@@ -76,7 +77,11 @@ const Login = () => {
   });
 }
     return (
+      <HelmetProvider>
         <div className="container  mx-auto mt-7 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <Helmet>
+            <title>FoodWave | Login</title>
+          </Helmet>
         <div className="p-4 sm:p-7">
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-gray-800">Login</h1>
@@ -172,6 +177,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      </HelmetProvider>
     );
 };
 

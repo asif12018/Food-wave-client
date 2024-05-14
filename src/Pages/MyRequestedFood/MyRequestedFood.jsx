@@ -4,6 +4,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 // import axios from "axios";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../customHooks/useAxiosSecure";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 const MyRequestedFood = () => {
@@ -28,7 +29,11 @@ const MyRequestedFood = () => {
       })
     },[user.email, axiosSecure])
     return (
+      <HelmetProvider>
         <div>
+          <Helmet>
+            <title>FoodWave | MyRequestedFood</title>
+          </Helmet>
             <div className="overflow-x-auto">
   <table className="table">
     {/* head */}
@@ -79,6 +84,7 @@ const MyRequestedFood = () => {
   </table>
 </div>
         </div>
+        </HelmetProvider>
     );
 };
 

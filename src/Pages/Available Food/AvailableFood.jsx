@@ -6,6 +6,7 @@ import Hero from "../../components/Hero/Hero";
 import { Menu, MenuButton, MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
 import { IoIosArrowDown } from "react-icons/io";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const AvailableFood = () => {
   const { user } = useContext(AuthContext);
@@ -89,6 +90,10 @@ const AvailableFood = () => {
   }
 
   return (
+    <HelmetProvider>
+      <Helmet>
+        <title>FoodWave | AvailableFood</title>
+      </Helmet>
     <div className="max-w-[1400px] mx-auto">
       <Hero />
       <div className="flex w-full  justify-between mb-[20px]">
@@ -137,6 +142,7 @@ const AvailableFood = () => {
         {foods.map(food => <Cards key={food._id} food={food}></Cards>)}
       </div>
     </div>
+    </HelmetProvider>
   );
 };
 

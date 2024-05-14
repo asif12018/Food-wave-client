@@ -1,6 +1,12 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
 const ErrorPage = () => {
     return (
+      <HelmetProvider>
         <div className="flex items-center justify-center  bg-white py-48">
+          <Helmet>
+            <title>404 Error</title>
+          </Helmet>
       <div className="flex flex-col">
         
 
@@ -48,6 +54,7 @@ const ErrorPage = () => {
         </div>
       </div>
     </div>
+    </HelmetProvider>
     );
 };
 
