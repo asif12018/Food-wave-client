@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from './../firebase/firebase.config';
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -37,28 +38,87 @@ const AuthProvider = ({children}) => {
 
 
     //observer function
-    useEffect(()=>{
-       const unSubscribe = () =>{
-        onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                setUser(currentUser)
+    // useEffect(()=>{
+    //    const unSubscribe = () =>{
+    //     onAuthStateChanged(auth, (currentUser) => {
+    //         const userEmail = currentUser?.email || user?.email;
+    //         const loggedUser = userEmail;
+    //         if (currentUser) {
+    //             setUser(currentUser)
                 
-                setLoading(false)
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/auth.user
+    //             setLoading(false)
+    //           // User is signed in, see docs for a list of available properties
+    //           // https://firebase.google.com/docs/reference/js/auth.user
               
-              // ...
-            } else {
-                setLoading(false)
-                setUser(null)
-              // User is signed out
-              // ...
-            }
-          });
-       }
+    //           // ...
 
-       return () => unSubscribe()
-    },[])
+    //           axios.post('http://localhost:5000/jwt', {email:loggedUser},{
+    //             withCredentials:true
+    //           })
+    //           .then(res =>{
+    //              console.log(res.data)
+    //           })
+    //           .catch(error =>{
+    //              console.error(error)
+    //           })
+    //         } else {
+    //             setLoading(false)
+    //             setUser(null)
+    //           // User is signed out
+    //           // ...
+    //           axios.post('http://localhost:5000/logout',loggedUser,{
+    //             withCredentials:true
+    //           })
+    //           .then(res => {
+    //              console.log(res.data)
+    //           })
+    //           .catch(error =>{
+    //              console.error(error)
+    //           })
+    //         }
+    //       });
+    //    }
+
+    //    return () => unSubscribe()
+    // },[])
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = userEmail;
+            console.log('this is email',loggedUser)
+            setUser(currentUser);
+            console.log('current user', currentUser);
+            setLoading(false);
+            //generating token if exist is login
+            if(currentUser){
+                
+                axios.post('http://localhost:5000/jwt', {email:loggedUser},{
+                    withCredentials:true
+                })
+                .then(res =>{
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+
+            }else{
+                
+                axios.post('http://localhost:5000/logout',loggedUser,{
+                    withCredentials:true
+                })
+                .then(res =>{
+                    console.log(res.data)
+                })
+                .catch(err =>{
+                    console.error(err)
+                })
+            }
+        });
+        return () => {
+            return unsubscribe();
+        }
+    }, [user?.email])
 
     const authInfo = {createUser, userSignin, user, setUser, userLogout, googleSignIn, loading}
 

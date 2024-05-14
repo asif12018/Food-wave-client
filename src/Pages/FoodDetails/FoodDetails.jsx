@@ -7,7 +7,9 @@ import moment from 'moment/moment';
 import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import useAxiosSecure from '../../customHooks/useAxiosSecure';
 const FoodDetails = () => {
+    const axiosSecure = useAxiosSecure()
     //checking is this user food
     const [isUser, setIsUser] = useState(false);
     const [requested, setRequested] = useState(false);
@@ -20,7 +22,7 @@ const FoodDetails = () => {
     const { photo, itemName, notes, expired, donnarName, donnarLocation, quantity, status, email, _id, donnarImage } = food;
     const position = [donnarLocation?.properties.lat, donnarLocation?.properties.lon]
     useEffect(() => {
-        axios.get(`http://localhost:5000/details/${id}`)
+        axiosSecure.get(`http://localhost:5000/details/${id}?userEmail=${user.email}`)
             .then(response => {
                 setFood(response.data);
                 setTimeout(() => {
@@ -33,7 +35,7 @@ const FoodDetails = () => {
                 }
             })
 
-    }, [id]);
+    }, [id, axiosSecure, user.email]);
     
 
     //send request for food function
@@ -75,7 +77,7 @@ const FoodDetails = () => {
     //checking if the user requested that food
     useEffect(() => {
         if (!_id) return; // Guard against undefined _id
-        axios.get(`http://localhost:5000/request/${user.email}?foodId=${_id}`)
+        axiosSecure.get(`http://localhost:5000/request/${user.email}?foodId=${_id}`)
             .then(data => {
                 console.log(data.data.requesterName);
                 if(data.data.requesterName){
@@ -83,7 +85,7 @@ const FoodDetails = () => {
                 }
                 
             })
-    }, [food]);
+    }, [food,user.email,]);
     // console.log('location', donnarLocation.properties.lat)
     return (
         <div>

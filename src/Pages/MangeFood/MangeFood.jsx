@@ -6,19 +6,21 @@ import { Link } from "react-router-dom";
 import { GeocoderAutocomplete } from "@geoapify/geocoder-autocomplete";
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss'
+import useAxiosSecure from "../../customHooks/useAxiosSecure";
 
 const MangeFood = () => {
+  const axiosSecure = useAxiosSecure()
   //context api data
   const { user } = useContext(AuthContext);
   const [myFood, setMyFood] = useState([]);
   const [locations, setLocations] = useState(null)
   const [myFoodId, setMyFoodId] = useState(null);
   useEffect(() => {
-    axios.get(`http://localhost:5000/userAllFood/${user?.email}`)
+    axiosSecure.get(`http://localhost:5000/userAllFood/${user?.email}`)
       .then(data => {
         setMyFood(data.data)
       })
-  }, [user])
+  }, [user.email, axiosSecure])
   // console.log(myFood._id)
   //auto location function
   useEffect(() => {

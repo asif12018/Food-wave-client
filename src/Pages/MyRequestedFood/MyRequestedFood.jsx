@@ -1,30 +1,32 @@
 /* eslint-disable react/jsx-key */
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../customHooks/useAxiosSecure";
 
 
 const MyRequestedFood = () => {
+  const axiosSecure = useAxiosSecure()
     //user data from context api
     const {user} = useContext(AuthContext);
     const [request, setRequest] = useState([]);
     const [donate , setDonate] = useState([]);
     useEffect(()=>{
-       axios.get(`http://localhost:5000/allRequest/${user.email}`)
+       axiosSecure.get(`http://localhost:5000/allRequest/${user.email}`)
        .then(res =>{
         //   console.log(res.data)
           setRequest(res.data);
        })
-    },[user.email])
+    },[user.email, axiosSecure])
     //user total donated food
     useEffect(()=>{
-      axios.get(`http://localhost:5000/userAllFood/${user.email}`)
+      axiosSecure.get(`http://localhost:5000/userAllFood/${user.email}`)
       .then(res =>{
         //  console.log('user total donated food',res.data)
         setDonate(res.data);
       })
-    },[user.email])
+    },[user.email, axiosSecure])
     return (
         <div>
             <div className="overflow-x-auto">
