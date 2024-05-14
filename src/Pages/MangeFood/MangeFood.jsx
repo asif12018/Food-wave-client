@@ -80,6 +80,40 @@ const MangeFood = () => {
     
 
   }
+
+  //delete function
+  const handleDelete = id =>{
+    // console.log(id)
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+        //delete axios
+        axios.delete(`http://localhost:5000/delete/${id}`)
+    .then(data => {
+       console.log(data.data)
+       console.log(id)
+       //filter food after delete
+        const filter = myFood.filter(food => food._id !== id);
+        // console.log(filter);
+        setMyFood(filter)
+
+    })
+      }
+    });
+    
+  }
   return (
     <div>
       <div className="overflow-x-auto">
@@ -117,7 +151,7 @@ const MangeFood = () => {
                   </div>
                 </td>
                 <td>
-                  <button className="btn bg-red-500 text-white">delete</button>
+                  <button onClick={()=>handleDelete(food._id)} className="btn bg-red-500 text-white">delete</button>
                 </td>
                 <td>
   <button onClick={() => {
@@ -150,28 +184,28 @@ const MangeFood = () => {
                 </div>
                 <div className="mb-5">
                   <label for="itemName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">food name</label>
-                  <input type="text" id="itemName" name='itemName' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" />
+                  <input type="text" id="itemName" name='itemName' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="food name" required/>
                 </div>
                 <div className="mb-5">
                   <label for="quantity" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">food quantity</label>
-                  <input type="text" id="quantity" name='quantity' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" />
+                  <input type="number" id="quantity" name='quantity' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="food quantity" required/>
                 </div>
                 <div className="mb-5">
                   <label for="expired" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">expired date</label>
-                  <input type="date" id="expired" name='expired' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" />
+                  <input type="date" id="expired" name='expired' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="date" required/>
                 </div>
 
                 <div className="mb-5">
                   <label for="status" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">food status</label>
-                  <input defaultValue={'available'} type="text" id="status" name='status' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" />
+                  <input defaultValue={'available'} type="text" id="status" name='status' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="food status" required/>
                 </div>
                 <div className="mb-5">
                   <label for="photo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">food photo</label>
-                  <input  type="text" id="photo" name='photo' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" />
+                  <input  type="text" id="photo" name='photo' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="photo url" required/>
                 </div>
                 <div className="mb-5">
                   <label for="notes" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Your Food Notes Here</label>
-                  <input  type="text" id="note" name='notes' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="enter your notes here" />
+                  <input  type="text" id="note" name='notes' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="enter your notes here" required/>
                 </div>
                
 

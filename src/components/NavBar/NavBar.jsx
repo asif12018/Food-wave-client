@@ -91,6 +91,10 @@ const NavBar = () => {
 
             <NavLink to={'/manageAll'} className="inline-block text-black hover:text-gray-600" >mange food</NavLink>
 
+
+            <NavLink to={'/myRequest'} className="inline-block text-black hover:text-gray-600" >My Requested</NavLink>
+             
+            
           </div>
         </div>
 

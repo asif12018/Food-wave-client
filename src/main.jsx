@@ -26,6 +26,7 @@ import {
 import FoodDetails from './Pages/FoodDetails/FoodDetails.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes.jsx';
 import MangeFood from './Pages/MangeFood/MangeFood.jsx';
+import MyRequestedFood from './Pages/MyRequestedFood/MyRequestedFood.jsx';
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path:'/manageAll',
         element:<ProtectedRoutes><MangeFood></MangeFood></ProtectedRoutes>
+      },
+      {
+        path:'/myRequest',
+        element:<ProtectedRoutes><MyRequestedFood></MyRequestedFood></ProtectedRoutes>
       }
     ]
   },

@@ -49,6 +49,7 @@ const FoodDetails = () => {
            const requestedDate = form.requestedDate.value;
            const expiredDate = form.expiredDate.value;
            const requesterNote = form.requesterNote.value;
+           const pickupLocation = donnarLocation;
         //    console.log('donnar name:', donnarName,
         //     'donnar email', donnarEmail,
         //     'foodName', foodName,
@@ -58,7 +59,7 @@ const FoodDetails = () => {
         //     'expiredDate', expiredDate,
         //     'requesterNote', requesterNote
         //    )
-           const requesterData = {donnarName, donnarEmail, foodName, foodId, requesterName, requesterEmail, requestedDate, expiredDate, requesterNote}
+           const requesterData = {donnarName, donnarEmail, foodName, foodId, requesterName, requesterEmail, requestedDate, expiredDate, requesterNote, pickupLocation}
         //    console.log(requesterData);
         //    console.log('requester Email:', requesterEmail)
            //sending data to the post
@@ -157,6 +158,10 @@ const FoodDetails = () => {
                                                     <label for="requesterNote" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Requester Note</label>
                                                     <textarea  type="text" id="requesterNote" name='requesterNote' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="enter your note here" required />
                                                 </div>
+                                                {/* <div className="mb-5">
+                                                    <label for="pickupLocation" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pickup Location</label>
+                                                    <textarea  type="text" id="pickupLocation" name='pickupLocation' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="enter your note here" required />
+                                                </div> */}
                                                
                                                
                                                 <div className="flex items-start mb-5">
