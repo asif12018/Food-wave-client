@@ -30,12 +30,12 @@ const Addproduct = () => {
             console.log("Suggestions:", suggestions);
         });
 
-        // Clean up event listeners when component unmounts
+        
         return () => {
             autocomplete.off('select');
             autocomplete.off('suggestions');
         };
-    }, []); // Empty dependency array ensures the effect runs only once after the initial render
+    }, []); 
 
 
 

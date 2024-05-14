@@ -1,0 +1,11 @@
+
+.autocomplete-container>:first-child{
+    display: none;
+  }
+  
+  
+  .autocomplete-container>.geoapify-close-button>:first-child{
+      display: none;
+  }
+
+ 

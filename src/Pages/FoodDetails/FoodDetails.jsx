@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { AuthContext } from './../../AuthProvider/AuthProvider';
 import moment from 'moment/moment';
+import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 const FoodDetails = () => {
     //checking is this user food
     const [isUser, setIsUser] = useState(false);

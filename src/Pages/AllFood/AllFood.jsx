@@ -50,13 +50,13 @@ const checkRequestFood = (food) =>{
        axios.get(`http://localhost:5000/filter/${user?.email}`)
        .then(response =>{
            const dataArray = response.data;
-           console.log(dataArray);
+          //  console.log(dataArray);
            if(dataArray.length > 0){
               
             const foodIds = dataArray.map(item => item.foodId); // Extracting foodIds from the array
             
             const filteredFood = defaultFood.filter(food => !foodIds.includes(food._id));
-            console.log(filteredFood);
+            // console.log(filteredFood);
             setFoods(filteredFood);
             setAllFood(filteredFood);
               
