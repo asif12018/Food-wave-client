@@ -7,9 +7,11 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import './AddFood.css'
 // const axios = require('axios/dist/browser/axios.cjs'); // browser
 import axios from "axios";
+import useAxiosSecure from "../../customHooks/useAxiosSecure";
 
 
 const Addproduct = () => {
+    const axiosSecure = useAxiosSecure();
     //auto location code start from here
     const [locations, setLocations] = useState(null)
     useEffect(() => {
@@ -77,7 +79,7 @@ const Addproduct = () => {
         // .then(res => res.json())
         // .then(data => {
         //     console.log(data)})
-        axios.post('http://localhost:5000/addFood', itemData)
+        axiosSecure.post(`http://localhost:5000/addFood?userEmail=${user.email}`, itemData)
             .then(data => console.log(data.data))
             .catch(error => console.log(error))
         Swal.fire({
