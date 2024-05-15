@@ -1,8 +1,36 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Title
 
-Currently, two official plugins are available:
+this is a react app use for food donation campaign. it has created to donate food and recive food who need
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+
+## Features
+
+- real search function. user can search food. and it will suggest the name of the food
+- real time location adding. it has build in location add feature. and its real
+- user can see the pickup location on the app
+- website layout can be change 3*3 to 2*2
+- food can be updated and user can delete the food
+
+
+## Package Name
+
+- React icons
+- Animate.css
+- Aos
+- firebase
+- tailwind css for react
+- daisy ui
+- react helmet
+
+
+
+
+
+
+
+
+## Demo site link:
+link: https://food-wave-6f59a.web.app/
