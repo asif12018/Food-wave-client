@@ -17,7 +17,7 @@ const AllFood = () => {
   const [allFood, setAllFood] = useState([]);
   const [defaultFood, setDefaultFood] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/allFood`)
+    axios.get(`https://food-wave-server-steel.vercel.app/allfood`)
       .then(data => {
         // setItems(data.data)
         // setFoods(data.data);
@@ -46,7 +46,7 @@ const AllFood = () => {
   // const {data, isLoading} = useQuery({
   //   queryKey:['foods'],
   //   queryFn: async()=>{
-  //     const response = await fetch('http://localhost:5000/allFood')
+  //     const response = await fetch('https://food-wave-server-steel.vercel.app/allfood')
   //     return response.json()
   //   }
   // })
@@ -76,7 +76,7 @@ const AllFood = () => {
 
 const checkRequestFood = (food) =>{
   
-       axios.get(`http://localhost:5000/filter/${user?.email}`)
+       axios.get(`https://food-wave-server-steel.vercel.app/filter/${user?.email}`)
        .then(response =>{
            const dataArray = response.data;
           //  console.log(dataArray);
@@ -106,7 +106,7 @@ const checkRequestFood = (food) =>{
   //food filtering function
   const handleSearch = (name) => {
     console.log('this is name:', name)
-    axios.get(`http://localhost:5000/filter?name=${name}`)
+    axios.get(`https://food-wave-server-steel.vercel.app/filter?name=${name}`)
       .then(data => setFoods(data.data))
   }
 

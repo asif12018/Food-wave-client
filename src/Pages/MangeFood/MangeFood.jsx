@@ -17,7 +17,7 @@ const MangeFood = () => {
   const [locations, setLocations] = useState(null)
   const [myFoodId, setMyFoodId] = useState(null);
   useEffect(() => {
-    axiosSecure.get(`http://localhost:5000/userAllFood/${user?.email}`)
+    axiosSecure.get(`https://food-wave-server-steel.vercel.app/userAllFood/${user?.email}`)
       .then(data => {
         setMyFood(data.data)
       })
@@ -63,7 +63,7 @@ const MangeFood = () => {
     // console.log(updateForm)
     // console.log(myFoodId);
     //update function
-    axios.patch(`http://localhost:5000/update/${myFoodId}`, updateForm)
+    axios.patch(`https://food-wave-server-steel.vercel.app/update/${myFoodId}`, updateForm)
      .then(response =>{
         console.log(response.data)
         document.getElementById('my_modal_1').close()
@@ -103,7 +103,7 @@ const MangeFood = () => {
           icon: "success"
         });
         //delete axios
-        axios.delete(`http://localhost:5000/delete/${id}`)
+        axios.delete(`https://food-wave-server-steel.vercel.app/delete/${id}`)
     .then(data => {
        console.log(data.data)
        console.log(id)

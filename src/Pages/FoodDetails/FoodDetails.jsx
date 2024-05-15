@@ -23,7 +23,7 @@ const FoodDetails = () => {
     const { photo, itemName, notes, expired, donnarName, donnarLocation, quantity, status, email, _id, donnarImage } = food;
     const position = [donnarLocation?.properties.lat, donnarLocation?.properties.lon]
     useEffect(() => {
-        axiosSecure.get(`http://localhost:5000/details/${id}?userEmail=${user.email}`)
+        axiosSecure.get(`https://food-wave-server-steel.vercel.app/details/${id}?userEmail=${user.email}`)
             .then(response => {
                 setFood(response.data);
                 setTimeout(() => {
@@ -66,7 +66,7 @@ const FoodDetails = () => {
         //    console.log(requesterData);
         //    console.log('requester Email:', requesterEmail)
            //sending data to the post
-           axios.post('http://localhost:5000/request/',requesterData)
+           axios.post('https://food-wave-server-steel.vercel.app/request/',requesterData)
            .then(data =>{
               console.log(data.data)
               const modal = document.getElementById('my_modal_1');
@@ -78,7 +78,7 @@ const FoodDetails = () => {
     //checking if the user requested that food
     useEffect(() => {
         if (!_id) return; // Guard against undefined _id
-        axiosSecure.get(`http://localhost:5000/request/${user.email}?foodId=${_id}`)
+        axiosSecure.get(`https://food-wave-server-steel.vercel.app/request/${user.email}?foodId=${_id}`)
             .then(data => {
                 console.log(data.data.requesterName);
                 if(data.data.requesterName){

@@ -70,7 +70,7 @@ const Addproduct = () => {
         // console.log(itemData);
         // console.log(locations.
         //     properties.municipality)
-        // fetch(`http://localhost:5000/addFood`,{
+        // fetch(`https://food-wave-server-steel.vercel.app/addFood`,{
         //     method: 'POST',
         //     headers:{
         //         'content-type':'application/json'
@@ -80,7 +80,7 @@ const Addproduct = () => {
         // .then(res => res.json())
         // .then(data => {
         //     console.log(data)})
-        axiosSecure.post(`http://localhost:5000/addFood?userEmail=${user.email}`, itemData)
+        axiosSecure.post(`https://food-wave-server-steel.vercel.app/addFood?userEmail=${user.email}`, itemData)
             .then(data => console.log(data.data))
             .catch(error => console.log(error))
         Swal.fire({

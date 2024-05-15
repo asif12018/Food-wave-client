@@ -16,7 +16,7 @@ const AvailableFood = () => {
   const [layout, setLayout] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/allFood?status=${'available'}`)
+    axios.get(`https://food-wave-server-steel.vercel.app/allfood?status=${'available'}`)
       .then(data => {
         // setAllFood(data.data);
         checkRequestFood(data.data);
@@ -29,7 +29,7 @@ const AvailableFood = () => {
   }, [user]);
 
   const checkRequestFood = (allFood) => {
-    axios.get(`http://localhost:5000/filter/${user?.email}`)
+    axios.get(`https://food-wave-server-steel.vercel.app/filter/${user?.email}`)
       .then(response => {
         const dataArray = response.data;
         if (dataArray.length > 0) {
@@ -45,7 +45,7 @@ const AvailableFood = () => {
   };
 
   const handleSearch = (name) => {
-    axios.get(`http://localhost:5000/filter?name=${name}`)
+    axios.get(`https://food-wave-server-steel.vercel.app/filter?name=${name}`)
       .then(data => setFoods(data.data));
   };
 

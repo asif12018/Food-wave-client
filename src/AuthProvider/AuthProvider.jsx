@@ -52,7 +52,7 @@ const AuthProvider = ({children}) => {
               
     //           // ...
 
-    //           axios.post('http://localhost:5000/jwt', {email:loggedUser},{
+    //           axios.post('https://food-wave-server-steel.vercel.app/jwt', {email:loggedUser},{
     //             withCredentials:true
     //           })
     //           .then(res =>{
@@ -66,7 +66,7 @@ const AuthProvider = ({children}) => {
     //             setUser(null)
     //           // User is signed out
     //           // ...
-    //           axios.post('http://localhost:5000/logout',loggedUser,{
+    //           axios.post('https://food-wave-server-steel.vercel.app/logout',loggedUser,{
     //             withCredentials:true
     //           })
     //           .then(res => {
@@ -92,7 +92,7 @@ const AuthProvider = ({children}) => {
             //generating token if exist is login
             if(currentUser){
                 
-                axios.post('http://localhost:5000/jwt', {email:loggedUser},{
+                axios.post('https://food-wave-server-steel.vercel.app/jwt', {email:loggedUser},{
                     withCredentials:true
                 })
                 .then(res =>{
@@ -104,7 +104,7 @@ const AuthProvider = ({children}) => {
 
             }else{
                 
-                axios.post('http://localhost:5000/logout',loggedUser,{
+                axios.post('https://food-wave-server-steel.vercel.app/logout',loggedUser,{
                     withCredentials:true
                 })
                 .then(res =>{

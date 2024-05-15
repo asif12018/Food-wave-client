@@ -8,7 +8,7 @@ const FeatureFood = () => {
     const [featuredFood, setFeaturedFood] = useState([]);
 
     useEffect(()=>{
-        axios.get('http://localhost:5000/allFood')
+        axios.get('https://food-wave-server-steel.vercel.app/allfood')
         .then(response => {
             const data = response.data;
             console.log("Backend response:", data); // Log backend response

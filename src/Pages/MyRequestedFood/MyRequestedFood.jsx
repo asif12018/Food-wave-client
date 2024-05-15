@@ -14,7 +14,7 @@ const MyRequestedFood = () => {
     const [request, setRequest] = useState([]);
     const [donate , setDonate] = useState([]);
     useEffect(()=>{
-       axiosSecure.get(`http://localhost:5000/allRequest/${user.email}`)
+       axiosSecure.get(`https://food-wave-server-steel.vercel.app/allRequest/${user.email}`)
        .then(res =>{
         //   console.log(res.data)
           setRequest(res.data);
@@ -22,7 +22,7 @@ const MyRequestedFood = () => {
     },[user.email, axiosSecure])
     //user total donated food
     useEffect(()=>{
-      axiosSecure.get(`http://localhost:5000/userAllFood/${user.email}`)
+      axiosSecure.get(`https://food-wave-server-steel.vercel.app/userAllFood/${user.email}`)
       .then(res =>{
         //  console.log('user total donated food',res.data)
         setDonate(res.data);
