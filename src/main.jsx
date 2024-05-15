@@ -65,16 +65,16 @@ const router = createBrowserRouter([
         element: <AvailableFood></AvailableFood>
       },
       {
-        path:'/details/:id',
-        element:<ProtectedRoutes><FoodDetails></FoodDetails></ProtectedRoutes>
+        path: '/details/:id',
+        element: <ProtectedRoutes><FoodDetails></FoodDetails></ProtectedRoutes>
       },
       {
-        path:'/manageAll',
-        element:<ProtectedRoutes><MangeFood></MangeFood></ProtectedRoutes>
+        path: '/manageAll',
+        element: <ProtectedRoutes><MangeFood></MangeFood></ProtectedRoutes>
       },
       {
-        path:'/myRequest',
-        element:<ProtectedRoutes><MyRequestedFood></MyRequestedFood></ProtectedRoutes>
+        path: '/myRequest',
+        element: <ProtectedRoutes><MyRequestedFood></MyRequestedFood></ProtectedRoutes>
       }
     ]
   },
@@ -82,12 +82,14 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <ChakraProvider>
+
+    <AuthProvider>
+      <ChakraProvider>
+        <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-        </ChakraProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+        </QueryClientProvider>
+      </ChakraProvider>
+    </AuthProvider>
+
   </React.StrictMode>,
 )

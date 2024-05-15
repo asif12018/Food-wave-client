@@ -1,6 +1,7 @@
 
 import {motion} from 'framer-motion';
-
+import Lottie from 'lottie-react';
+import contactAnimation from '../../assets/Animation - 1715756836670.json'
 const Contact = () => {
     return (
         <section className="bg-white dark:bg-gray-900 py-16">
@@ -54,6 +55,9 @@ const Contact = () => {
                 <p className="mt-2 text-[#95d230] dark:text-blue-400">+1 (555) 000-0000</p>
             </motion.div>
         </div>
+    </div>
+    <div>
+        <Lottie animationData={contactAnimation}></Lottie>
     </div>
 </section>
     );

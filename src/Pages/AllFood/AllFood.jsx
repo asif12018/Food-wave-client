@@ -3,13 +3,14 @@ import axios from "axios";
 import Cards from "../../components/Cards/Cards";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import Hero from "../../components/Hero/Hero";
-import { Menu, MenuButton, MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
+import { Menu, MenuButton, MenuDivider, MenuItem, MenuList, useQuery } from "@chakra-ui/react";
 import { IoIosArrowDown } from "react-icons/io";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const AllFood = () => {
   //context api data
+  const [layout, setLayout] = useState(false)
   const {user} = useContext(AuthContext);
   const [foods, setFoods] = useState([])
   const [items, setItems] = useState([])
@@ -41,7 +42,34 @@ const AllFood = () => {
       )
   }, [user, foods])
 
- 
+  //load data using tanstack query
+  // const {data, isLoading} = useQuery({
+  //   queryKey:['foods'],
+  //   queryFn: async()=>{
+  //     const response = await fetch('http://localhost:5000/allFood')
+  //     return response.json()
+  //   }
+  // })
+  // console.log(data)
+  
+  //  console.log(data)
+  // useEffect(()=>{
+  //     if(data){
+  //       setDefaultFood(data);
+  //       checkRequestFood(data);
+  //       //creating a new array 
+  //       const newArray = data.data.map(obj => {
+  //         return {
+  //           id: obj._id,
+  //           name: obj.itemName
+  //         }
+  //       })
+
+  //       setItems(newArray);
+  //     }
+  // },[data])
+
+//  console.log(defaultFood)
 
   //filtering data based on the requested food
 
@@ -145,7 +173,7 @@ const checkRequestFood = (food) =>{
         />
         
       </div>
-      <div className="w-1/2">
+      <div className="w-1/2 flex">
         
           
           <div >
@@ -174,12 +202,37 @@ const checkRequestFood = (food) =>{
   </MenuList>
 </Menu>
           </div>
+
+          <div>
+            <Menu>
+              <MenuButton
+                px={4}
+                py={2}
+                background={'black'}
+                textColor={'white'}
+                fontWeight={'semibold'}
+                transition='all 0.2s'
+                borderRadius='md'
+                borderWidth='1px'
+                _hover={{ bg: 'gray.400' }}
+                _expanded={{ bg: 'blue.400' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                <span className="flex items-center justify-between">change layout <IoIosArrowDown /></span>
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => setLayout(!layout)}>2 x 2</MenuItem>
+                <MenuItem onClick={() => setLayout(!layout)}>3 x 3</MenuItem>
+                <MenuDivider />
+              </MenuList>
+            </Menu>
+          </div>
           
         </div>
       </div>
 
       <h3 className="text-2xl font-bold">Total Available Food:{foods.length}</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className={layout ? "grid grid-cols-1 md:grid-cols-2 gap-6": "grid grid-cols-1 md:grid-cols-3 gap-6"}>
         {
           foods.map(food => <Cards key={food._id} food={food}></Cards>)
         }

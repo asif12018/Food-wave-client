@@ -13,6 +13,7 @@ const AvailableFood = () => {
   const [foods, setFoods] = useState([]);
   const [items, setItems] = useState([]);
   const [allFood, setAllFood] = useState([]);
+  const [layout, setLayout] = useState(false);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/allFood?status=${'available'}`)
@@ -108,7 +109,7 @@ const AvailableFood = () => {
             formatResult={formatResult}
           />
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 flex">
           <div>
             <Menu>
               <MenuButton
@@ -134,11 +135,37 @@ const AvailableFood = () => {
               </MenuList>
             </Menu>
           </div>
+
+          <div>
+            <Menu>
+              <MenuButton
+                px={4}
+                py={2}
+                background={'black'}
+                textColor={'white'}
+                fontWeight={'semibold'}
+                transition='all 0.2s'
+                borderRadius='md'
+                borderWidth='1px'
+                _hover={{ bg: 'gray.400' }}
+                _expanded={{ bg: 'blue.400' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                <span className="flex items-center justify-between">change layout <IoIosArrowDown /></span>
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => setLayout(!layout)}>2 x 2</MenuItem>
+                <MenuItem onClick={() => setLayout(!layout)}>3 x 3</MenuItem>
+                <MenuDivider />
+              </MenuList>
+            </Menu>
+          </div>
+          
         </div>
       </div>
 
       <h3 className="text-2xl font-bold">Total Available Food: {foods.length}</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className={layout ? "grid grid-cols-1 md:grid-cols-2 gap-6": "grid grid-cols-1 md:grid-cols-3 gap-6"}>
         {foods.map(food => <Cards key={food._id} food={food}></Cards>)}
       </div>
     </div>

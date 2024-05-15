@@ -11,7 +11,7 @@ const NavBar = () => {
   }
   
   
-    const [isOpen, setIsOpen] = useState(false)
+    // const [isOpen, setIsOpen] = useState(false)
   //context api data
   const { user, userLogout } = useContext(AuthContext)
   //user logout function
@@ -25,6 +25,8 @@ const NavBar = () => {
         console.log(error);
       });
   }
+
+  
   
   return (
 
@@ -65,7 +67,7 @@ const NavBar = () => {
       }
 
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(isOpen => !isOpen)} type="button" className="hs-collapse-toggle size-[38px] flex justify-center items-center text-sm font-semibold rounded-xl border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
+            <button  type="button" className="hs-collapse-toggle size-[38px] flex justify-center items-center text-sm font-semibold rounded-xl border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
               <svg className="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" x2="21" y1="6" y2="6" /><line x1="3" x2="21" y1="12" y2="12" /><line x1="3" x2="21" y1="18" y2="18" /></svg>
               <svg className="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
             </button>
@@ -74,11 +76,10 @@ const NavBar = () => {
 
 
 
-        <motion.div id="navbar-collapse-with-animation" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block md:w-auto md:basis-auto md:order-2 md:col-span-6" animate={isOpen ? "open" : "closed"}
-      variants={variants}>
-          <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0 nav-holder">
+        <div id="navbar-collapse-with-animation" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block md:w-auto md:basis-auto md:order-2 md:col-span-6" >
+          <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-4 md:mt-0 nav-holder">
 
-            <NavLink to={'/'} className="inline-block text-black hover:text-gray-600" aria-current="page">Home</NavLink>
+            <NavLink to={'/'} className="inline-block text-black hover:text-gray-600 text-sm" aria-current="page">Home</NavLink>
 
 
 
@@ -86,26 +87,26 @@ const NavBar = () => {
             
 
 
-            <NavLink to={'/addFood'} className="inline-block text-black hover:text-gray-600" >Add Food</NavLink>
+            <NavLink to={'/addFood'} className="inline-block text-black hover:text-gray-600 text-sm" >Add Food</NavLink>
 
             <NavLink to={'/available'} 
             className='inline-block text-black hover:text-gray-600'
             >Available Foods</NavLink>
 
 
-            <NavLink to={'/allFood'} className="inline-block text-black hover:text-gray-600" >All Food</NavLink>
+            <NavLink to={'/allFood'} className="inline-block text-black hover:text-gray-600 text-sm" >All Food</NavLink>
 
 
-            <NavLink to={'/register'} className="inline-block text-black hover:text-gray-600" >Register</NavLink>
+            <NavLink to={'/register'} className="inline-block text-black hover:text-gray-600 text-sm" >Register</NavLink>
 
-            <NavLink to={'/manageAll'} className="inline-block text-black hover:text-gray-600" >manage food</NavLink>
+            <NavLink to={'/manageAll'} className="inline-block text-black hover:text-gray-600 text-sm" >manage food</NavLink>
 
 
-            <NavLink to={'/myRequest'} className="inline-block text-black hover:text-gray-600" >My Food Request</NavLink>
+            <NavLink to={'/myRequest'} className="inline-block text-black hover:text-gray-600 text-sm" >My Food Request</NavLink>
              
             
           </div>
-        </motion.div>
+        </div>
 
       </nav>
     </header>
