@@ -1,11 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import './NavBar.css'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './../../AuthProvider/AuthProvider';
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { motion } from 'framer-motion';
-
+import { ImCross } from "react-icons/im";
 
 // const itemVariants: Variants = {
 //   open: {
@@ -25,8 +25,34 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hidden, setHidden] = useState(true)
 
-    // const [isOpen, setIsOpen] = useState(false)
-  //context api data
+  //set state base on the screen size
+
+  useEffect(() => {
+    //setting the media query value min-width
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    
+    // function to set state based on the screen size
+    const handleMediaQueryChange = (event) => {
+      if (event.matches) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    };
+
+    // Add event listener for media query changes
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
+
+    // Set the initial state based on the media query
+    handleMediaQueryChange(mediaQuery);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaQueryChange);
+    };
+  }, []);
+
+  
   const { user, userLogout } = useContext(AuthContext)
   //user logout function
   const handleLogout = () => {
@@ -89,7 +115,7 @@ const NavBar = () => {
               {
                 hidden ? 
                 <RxHamburgerMenu />
-                : <svg className="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                : <ImCross />
               }
               
               
