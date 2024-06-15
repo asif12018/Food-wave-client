@@ -40,7 +40,7 @@ const AllFood = () => {
       }
 
       )
-  }, [user, foods])
+  }, [user])
 
   //load data using tanstack query
   // const {data, isLoading} = useQuery({
